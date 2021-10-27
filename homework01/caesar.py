@@ -16,7 +16,27 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     """
     ciphertext = ""
     # PUT YOUR CODE HERE
-    return ciphertext
+    alfavit_ENG = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABC'
+    alfavit_eng = 'abcdefghijklmnopqrstuvwxyzabc'
+    for i in plaintext:
+        if i.isupper():
+            position = alfavit_ENG.find(i)
+            new_position = position + shift
+            if i in alfavit_ENG:
+                ciphertext += alfavit_ENG[new_position]
+            else:
+                ciphertext += i
+        else:
+            position = alfavit_eng.find(i)
+            new_position = position + shift
+            if i in alfavit_eng:
+                ciphertext += alfavit_eng[new_position]
+            else:
+                ciphertext += i
+    return ciphertex
+
+
+print(caesar("Pyton", 3))
 
 
 def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
@@ -34,7 +54,28 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     """
     plaintext = ""
     # PUT YOUR CODE HERE
+    alfavit_ENG = 'XYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    alfavit_eng = 'xyzabcdefghijklmnopqrstuvwxyz'
+    for i in ciphertex:
+        if i.isupper():
+            position = alfavit_ENG.find(i)
+            new_position = position - shift
+            if i in alfavit_ENG:
+                plaintext += alfavit_ENG[new_position]
+            else:
+                plaintext += i
+        else:
+            position = alfavit_eng.find(i)
+            new_position = position - shift
+            if i in alfavit_eng:
+                plaintext += alfavit_eng[new_position]
+            else:
+                plaintext += i
+
     return plaintext
+
+
+print(caesar("Sbwkrq", 3))
 
 
 def caesar_breaker_brute_force(ciphertext: str, dictionary: tp.Set[str]) -> int:
