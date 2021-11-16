@@ -53,7 +53,6 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
     alfavit_ENG = 'XYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
     alfavit_eng = 'xyzabcdefghijklmnopqrstuvwxyz'
     for i in ciphertex:
@@ -83,5 +82,4 @@ def caesar_breaker_brute_force(ciphertext: str, dictionary: tp.Set[str]) -> int:
     Brute force breaking a Caesar cipher.
     """
     best_shift = 0
-    # PUT YOUR CODE HERE
     return best_shift
