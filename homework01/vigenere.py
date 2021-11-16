@@ -42,7 +42,7 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         element = 0
         if letter.islower():
             plaintext += chr(97 + ((ord(letter) - 97 - shift) % 26))
-        elif bukva.isupper():
+        elif letter.isupper():
             plaintext += chr(65 + ((ord(letter) - 65 - shift) % 26))
         else:
             plaintext += letter
