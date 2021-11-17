@@ -8,7 +8,7 @@ def is_prime(n: int) -> bool:
         return True
     elif n == 1:
         return False
-    if n % 2 == 0
+    if n % 2 == 0:
         return False
     value = 3
     while value ** 2 <= n and n % value != 0:
@@ -22,7 +22,7 @@ def gcd(p: int, q: int) -> int:
     else:
         q = q % a
     return p + q
-    #pass
+    # pass
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
