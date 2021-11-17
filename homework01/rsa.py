@@ -1,5 +1,6 @@
 import random
 import typing as tp
+from typing import List
 
 
 def is_prime(n: int) -> bool:
