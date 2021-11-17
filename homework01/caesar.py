@@ -4,7 +4,6 @@ import typing as tp
 def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     """
     Encrypts plaintext using a Caesar cipher.
-
     >>> encrypt_caesar("PYTHON")
     'SBWKRQ'
     >>> encrypt_caesar("python")
@@ -15,34 +14,20 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     ciphertext = ""
-    # PUT YOUR CODE HERE
-    alfavit_ENG = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABC'
-    alfavit_eng = 'abcdefghijklmnopqrstuvwxyzabc'
-    for i in plaintext:
-        if i.isupper():
-            position = alfavit_ENG.find(i)
-            new_position = position + shift
-            if i in alfavit_ENG:
-                ciphertext += alfavit_ENG[new_position]
-            else:
-                ciphertext += i
+    for letter in range(len(plaintext)):
+        letter = plaintext[letter]
+        if letter.isupper():
+            ciphertext += chr((ord(letter) + shift - ord("A")) % 26 + ord("A"))
+        elif letter.islower():
+            ciphertext += chr((ord(letter) + shift - ord("a")) % 26 + ord("a"))
         else:
-            position = alfavit_eng.find(i)
-            new_position = position + shift
-            if i in alfavit_eng:
-                ciphertext += alfavit_eng[new_position]
-            else:
-                ciphertext += i
-    return ciphertex
-
-
-print(caesar("Pyton", 3))
+            ciphertext = ciphertext + letter
+    return ciphertext
 
 
 def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     """
     Decrypts a ciphertext using a Caesar cipher.
-
     >>> decrypt_caesar("SBWKRQ")
     'PYTHON'
     >>> decrypt_caesar("sbwkrq")
@@ -53,28 +38,15 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    alfavit_ENG = 'XYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    alfavit_eng = 'xyzabcdefghijklmnopqrstuvwxyz'
-    for i in ciphertex:
-        if i.isupper():
-            position = alfavit_ENG.find(i)
-            new_position = position - shift
-            if i in alfavit_ENG:
-                plaintext += alfavit_ENG[new_position]
-            else:
-                plaintext += i
+    for letter in range(len(ciphertext)):
+        letter = ciphertext[letter]
+        if letter.isupper():
+            plaintext += chr((ord(letter) - shift - ord("A")) % 26 + ord("A"))
+        elif letter.islower():
+            plaintext += chr((ord(letter) - shift - ord("a")) % 26 + ord("a"))
         else:
-            position = alfavit_eng.find(i)
-            new_position = position - shift
-            if i in alfavit_eng:
-                plaintext += alfavit_eng[new_position]
-            else:
-                plaintext += i
-
+            plaintext = plaintext + letter
     return plaintext
-
-
-print(caesar("Sbwkrq", 3))
 
 
 def caesar_breaker_brute_force(ciphertext: str, dictionary: tp.Set[str]) -> int:
