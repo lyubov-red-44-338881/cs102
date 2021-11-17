@@ -4,20 +4,25 @@ from typing import List
 
 
 def is_prime(n: int) -> bool:
-    k = 0
-    for i in range(2, n // 2 + 1):
-        if n % i == 0:
-            k = k + 1
-    if k <= 0:
+    if n == 2:
         return True
-    else:
+    elif n == 1:
         return False
+    if n % 2 == 0
+        return False
+    value = 3
+    while value ** 2 <= n and n % value != 0:
+        value += 2
+    return value ** 2 > n
 
 
 def gcd(p: int, q: int) -> int:
-    while p % q != 0:
-        p, q = q, p % q
-    return q
+    while p != 0 and q != 0:
+        p = p % q
+    else:
+        q = q % a
+    return p + q
+    #pass
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
