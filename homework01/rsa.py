@@ -20,7 +20,7 @@ def gcd(p: int, q: int) -> int:
     while p != 0 and q != 0:
         p = p % q
     else:
-        q = q % a
+        q = q % p
     return p + q
     # pass
 
