@@ -20,7 +20,7 @@ def gcd(p: int, q: int) -> int:
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
-    division = []
+    division: List[int] = []
     phi1 = phi
     division.insert(0, phi // e)
     while phi % e != 0:
