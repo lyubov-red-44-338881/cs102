@@ -34,8 +34,6 @@ def bin_tree_maze(
                 grid[x][y] = " "
                 empty_cells.append((x, y))
 
-    grid[beginning[0]][beginning[1]] = "X"
-    grid[ending[0]][ending[1]] = "X"
 
     for y_coordinate_curr in range(1, rows, 2):
         for x_coordinate_curr in range(1, cols, 2):
@@ -59,7 +57,10 @@ def bin_tree_maze(
     else:
         beginning = (0, rows - 1)
         ending = (cols - 1, 0)
-
+    
+    grid[beginning[0]][beginning[1]] = "X"
+    grid[ending[0]][ending[1]] = "X"   
+    
     return grid
 
 
