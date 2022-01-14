@@ -199,7 +199,7 @@ def solve_maze(grid: List[List[Union[str, int]]]) -> Optional[List[Tuple[int, in
     while grid[ending[0]][ending[1]] == 0:
         k += 1
         make_step(grid, k)
-    return shortest_path(grid, ending)
+    return grid
 
 
 def add_path_to_grid(
