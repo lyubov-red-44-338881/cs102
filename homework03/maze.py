@@ -33,7 +33,6 @@ def bin_tree_maze(
                 grid[x][y] = " "
                 empty_cells.append((x, y))
 
-
     for y_coordinate_curr in range(1, rows, 2):
         for x_coordinate_curr in range(1, cols, 2):
             direction = randint(0, 1)
