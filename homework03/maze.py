@@ -217,6 +217,6 @@ if name == "main":
     print(pd.DataFrame(bin_tree_maze(5, 5)))
     GRID = bin_treemaze(15, 15)
     print(pd.DataFrame(GRID))
-    , PATH = solve_maze(GRID)
+    _, PATH = solve_maze(GRID)
     MAZE = add_path_togrid(, PATH)
     print(pd.DataFrame(MAZE))
