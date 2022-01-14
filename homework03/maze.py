@@ -12,7 +12,6 @@ def create_grid(rows: int = 15, cols: int = 15) -> List[List[Union[str, int]]]:
 def remove_wall(
     grid: List[List[Union[str, int]]], coord: Tuple[int, int]
 ) -> List[List[Union[str, int]]]:
-
     if grid[coord[0]][coord[1]] != " ":
         grid[coord[0]][coord[1]] = " "
     elif coord[1] + 1 < len(grid[0]) - 1:
