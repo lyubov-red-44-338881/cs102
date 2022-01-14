@@ -117,7 +117,7 @@ def make_step(grid: List[List[Union[str, int]]], k: int) -> List[List[Union[str,
 
 def shortest_path(
     grid: List[List[Union[str, int]]], exit_coordinate: Tuple[int, int]
-) -> Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]:
+) -> Optional[List[Tuple[int, int], List[Tuple[int, int]]]]:
 
     path_way = [exit_coordinate]
     x = exit_coordinate[0]
@@ -199,7 +199,7 @@ def solve_maze(grid: List[List[Union[str, int]]]) -> Optional[List[Tuple[int, in
     while grid[ending[0]][ending[1]] == 0:
         k += 1
         make_step(grid, k)
-    return grid, shortest_path(grid, k)
+    return grid, shortest_path(grid, ending)
 
 
 def add_path_to_grid(
