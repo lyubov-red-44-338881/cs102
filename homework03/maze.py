@@ -55,7 +55,6 @@ def bin_tree_maze(
     else:
         beginning = (0, rows - 1)
         ending = (cols - 1, 0)
-    
     grid[beginning[0]][beginning[1]] = "X"
     grid[ending[0]][ending[1]] = "X"   
     
