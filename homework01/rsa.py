@@ -13,7 +13,6 @@ def is_prime(n: int) -> bool:
         return True
 
 
-
 def gcd(p: int, q: int) -> int:
     while p != 0 and q != 0:
         if p > q:
