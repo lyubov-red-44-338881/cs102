@@ -56,8 +56,8 @@ def bin_tree_maze(
         beginning = (0, rows - 1)
         ending = (cols - 1, 0)
     grid[beginning[0]][beginning[1]] = "X"
-    grid[ending[0]][ending[1]] = "X"   
-    
+    grid[ending[0]][ending[1]] = "X"
+
     return grid
 
 
@@ -218,5 +218,4 @@ if __name__ == "__main__":
     GRID = bin_tree_maze(15, 15)
     print(pd.DataFrame(GRID))
     _, PATH = solve_maze(GRID)
-    MAZE = add_path_to_grid(GRID, PATH)
-    print(pd.DataFrame(MAZE))
+    MAZE = add_path_to_gr
