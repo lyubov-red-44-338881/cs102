@@ -164,7 +164,8 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
     return False
 
 
-def solve_maze(grid: List[List[Union[str, int]]]) -> Optional[List[Tuple[int, int]]]:
+def solve_maze(grid: List[List[Union[str, int]]]) 
+) -> Optional[List[Tuple[int, int]]]:
     exits = get_exits(grid)
     if len(exits) == 1:
         return None
