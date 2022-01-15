@@ -1,33 +1,40 @@
-def encrypt_vigenere(plaintext: str, shift: int = 3) -> str:
+def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     ciphertext = ""
-    for symbol in plaintext:
-        if symbol.isalpha():
-            if symbol.isupper():
-                ciphertext += chr((ord(symbol) - ord("A") + shift) % 26 + ord("A"))
-            else:
-                ciphertext += chr((ord(symbol) - ord("a") + shift) % 26 + ord("a"))
+    alph_up = string.ascii_uppercase
+    alph_low = string.ascii_lowercase
+   
+    for i, letter in enumerate(plaintext):
+        if letter.isupper():
+            index = alph_up.index(letter)
+            keyword_index = alph_up.index(keyword[i % len(keyword)].upper())
+            index = (index + keyword_index) % len(alph_up)
+            ciphertext += alph_up[index]
+        elif letter.islower():
+            index = alph_low.index(letter)
+            keyword_index = alph_low.index(keyword[i % len(keyword)].lower())
+            index = (index + keyword_index) % len(alph_low)
+            ciphertext += alph_low[index]
         else:
-            ciphertext += symbol
-    return ciphertext
+            ciphertext += letter
+   return ciphertext 
 
 
 def decrypt_vigenere(ciphertext: str, shift: int = 3) -> str:
-    """
-    Decrypts a ciphertext using a Vigenere cipher.
-    >>> decrypt_vigenere("PYTHON", "A")
-    'PYTHON'
-    >>> decrypt_vigenere("python", "a")
-    'python'
-    >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
-    'ATTACKATDAWN'
-    """
     plaintext = ""
-    for symbol in ciphertext:
-        if symbol.isalpha():
-            if symbol.isupper():
-                plaintext += chr((ord(symbol) - ord("A") - shift) % 26 + ord("A"))
-            else:
-                plaintext += chr((ord(symbol) - ord("a") - shift) % 26 + ord("a"))
+    alph_up = string.ascii_uppercase
+    alph_low = string.ascii_lowercase
+   
+    for i, letter in enumerate(ciphertext):
+        if letter.isupper():
+            index = alph_up.index(letter)
+            keyword_index = alph_up.index(keyword[i % len(keyword)].upper())
+            index = (index - keyword_index) % len(alph_up)
+            plaintext += alph_up[index]
+        elif letter.islower():
+            index = alph_low.index(letter)
+            keyword_index = alph_low.index(keyword[i % len(keyword)].lower())
+            index = (index - keyword_index) % len(alph_low)
+            plaintext += alph_low[index]
         else:
-            plaintext += symbol
-    return plaintext
+            plaintext += letter
+   return plaintext
