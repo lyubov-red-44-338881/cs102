@@ -37,7 +37,7 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     plaintext = ""
     for symb in ciphertext:
         if symb.isalpha():
-            if symbol.isupper():
+            if symb.isupper():
                 plaintext += chr((ord(symb) - ord("A") - shift) % 26 + ord("A"))
             else:
                 plaintext += chr((ord(symb) - ord("a") - shift) % 26 + ord("a"))
