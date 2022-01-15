@@ -50,5 +50,5 @@ if __name__ == "__main__":
 
     draw_maze(GRID, CELL_SIZE)
     ttk.Button(window, text="Solve", command=show_solution).pack(pady=20)
-   
+
     window.mainloop()
