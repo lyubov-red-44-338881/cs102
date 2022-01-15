@@ -1,3 +1,6 @@
+import string
+
+
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     ciphertext = ""
     alph_up = string.ascii_uppercase
@@ -19,7 +22,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     return ciphertext
 
 
-def decrypt_vigenere(ciphertext: str, shift: int = 3) -> str:
+def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     plaintext = ""
     alph_up = string.ascii_uppercase
     alph_low = string.ascii_lowercase
