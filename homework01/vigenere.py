@@ -16,7 +16,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
             ciphertext += alph_low[index]
         else:
             ciphertext += letter
-   return ciphertext 
+    return ciphertext 
 
 
 def decrypt_vigenere(ciphertext: str, shift: int = 3) -> str:
@@ -37,4 +37,4 @@ def decrypt_vigenere(ciphertext: str, shift: int = 3) -> str:
             plaintext += alph_low[index]
         else:
             plaintext += letter
-   return plaintext
+    return plaintext
