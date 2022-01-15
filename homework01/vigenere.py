@@ -1,4 +1,4 @@
-def encrypt_vigenere(plaintext: str, keyword: str) -> str:
+def encrypt_vigenere(plaintext: str, keyword: str, shift: int = 3) -> str:
     ciphertext = ""
     for symbol in plaintext:
         if symbol.isalpha():
@@ -11,7 +11,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     return ciphertext
 
 
-def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
+def decrypt_vigenere(ciphertext: str, keyword: str, shift: int = 3) -> str:
     """
     Decrypts a ciphertext using a Vigenere cipher.
     >>> decrypt_vigenere("PYTHON", "A")
