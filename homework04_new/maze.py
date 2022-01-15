@@ -184,22 +184,22 @@ def solve_maze(grid: List[List[Union[str, int]]]) -> Optional[List[Tuple[int, in
 
     k = 1
 
-    if beginning[0] != 0:
-        if grid[beginning[0] - 1][beginning[1]] == 0:
-            grid[beginning[0] - 1][beginning[1]] = k + 1
     if beginning[0] != len(grid) - 1:
         if grid[beginning[0] + 1][beginning[1]] == 0:
             grid[beginning[0] + 1][beginning[1]] = k + 1
-    if beginning[1] != 0:
-        if grid[beginning[0]][beginning[1] - 1] == 0:
-            grid[beginning[0]][beginning[1] - 1] = k + 1
+    if beginning[0] != 0:
+        if grid[beginning[0] - 1][beginning[1]] == 0:
+            grid[beginning[0] - 1][beginning[1]] = k + 1
     if beginning[1] != len(grid[0]) - 1:
         if grid[beginning[0]][beginning[1] + 1] == 0:
             grid[beginning[0]][beginning[1] + 1] = k + 1
+    if beginning[1] != 0:
+        if grid[beginning[0]][beginning[1] - 1] == 0:
+            grid[beginning[0]][beginning[1] - 1] = k + 1
     while grid[ending[0]][ending[1]] == 0:
         k += 1
         make_step(grid, k)
-    return grid, shortest_path(grid, ending)
+    return shortest_path(grid, ending)
 
 
 def add_path_to_grid(
