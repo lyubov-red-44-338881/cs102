@@ -1,17 +1,13 @@
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     ciphertext = ""
-    for element in range(len(plaintext)):
-        letter = plaintext[element]
-        keyword = keyword.upper()
-        shift = ord(keyword[element % len(keyword)]) - 65
-        element = 0
-        if letter.islower():
-            ciphertext += chr(97 + ((ord(letter) - 97 + shift) % 26))
-        elif letter.isupper():
-            ciphertext += chr(65 + ((ord(letter) - 65 + shift) % 26))
+    for symbol in plaintext:
+        if symbol.isalpha():
+            if symbol.isupper():
+                ciphertext += chr((ord(symbol) - ord("A") + shift) % 26 + ord("A"))
+            else:
+                ciphertext += chr((ord(symbol) - ord("a") + shift) % 26 + ord("a"))
         else:
-            ciphertext += letter
-        element += 1
+            ciphertext += symbol
     return ciphertext
 
 
@@ -26,16 +22,12 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    for element in range(len(ciphertext)):
-        letter = ciphertext[element]
-        keyword = keyword.upper()
-        shift = ord(keyword[element % len(keyword)]) - 65
-        element = 0
-        if letter.islower():
-            plaintext += chr(97 + ((ord(letter) - 97 - shift) % 26))
-        elif letter.isupper():
-            plaintext += chr(65 + ((ord(letter) - 65 - shift) % 26))
+    for symbol in ciphertext:
+        if symbol.isalpha():
+            if symbol.isupper():
+                plaintext += chr((ord(symbol) - ord("A") - shift) % 26 + ord("A"))
+            else:
+                plaintext += chr((ord(symbol) - ord("a") - shift) % 26 + ord("a"))
         else:
-            plaintext += letter
-        element += 1
+            plaintext += symbol
     return plaintext
