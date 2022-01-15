@@ -2,7 +2,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     ciphertext = ""
     alph_up = string.ascii_uppercase
     alph_low = string.ascii_lowercase
-   
+
     for i, letter in enumerate(plaintext):
         if letter.isupper():
             index = alph_up.index(letter)
@@ -16,14 +16,14 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
             ciphertext += alph_low[index]
         else:
             ciphertext += letter
-    return ciphertext 
+    return ciphertext
 
 
 def decrypt_vigenere(ciphertext: str, shift: int = 3) -> str:
     plaintext = ""
     alph_up = string.ascii_uppercase
     alph_low = string.ascii_lowercase
-   
+
     for i, letter in enumerate(ciphertext):
         if letter.isupper():
             index = alph_up.index(letter)
