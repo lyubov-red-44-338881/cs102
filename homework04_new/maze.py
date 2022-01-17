@@ -169,11 +169,11 @@ def solve_maze(
 ) -> Tuple[List[List[Union[str, int]]], Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]]:
     exits = get_exits(grid)
     if len(exits) == 1:
-        return None
+        return grid, exits
 
     for i in exits:
         if encircled_exit(grid, i):
-            return None
+            return grid, None
     beginning = exits[0]
     ending = exits[1]
     grid[beginning[0]][beginning[1]] = 1
