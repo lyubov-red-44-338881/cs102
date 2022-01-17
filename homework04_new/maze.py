@@ -183,7 +183,6 @@ def solve_maze(
             if grid[row][col] == " ":
                 grid[row][col] = 0
 
-
     k = 1
 
     if beginning[0] != len(grid) - 1:
