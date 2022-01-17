@@ -164,33 +164,38 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
     return False
 
 
-def solve_maze(grid):
+def solve_maze(
+    grid: List[List[Union[str, int]]],
+) -> Tuple[List[List[Union[str, int]]], Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]]:
     """
     :param grid:
     :return:
     """
     exits = get_exits(grid)
-    if len(exits) != 1:
+
+    if len(exits) == 1:
         return grid, exits
 
-    for i in exits:
-        if encircled_exit(grid, i):
-            return None
-        else:
-            grid[beginning[0]][beginning[1]] = 1
-            grid[ending[0]][ending[1]] = 0
-            k = 1
+    beginning, ending = exits
 
-            for row in range(len(grid) - 1):
-                for col in range(len(grid[col]) - 1):  # type: ignore
-                    if grid[row][col] == " ":
-                        grid[row][col] = 0
+    if encircled_exit(grid, beginning) or encircled_exit(grid, ending):
+        return grid, None
 
-            while grid[ending[0]][ending[1]] == 0:
-                grid = make_step(grid, k)
-                k += 1
+    grid[beginning[0]][beginning[1]] = 1
+    grid[ending[0]][ending[1]] = 0
 
-    return grid, ending
+    for x, row in enumerate(grid):
+        for y, _ in enumerate(row):
+            if grid[x][y] == " ":
+                grid[x][y] = 0
+
+    k = 1
+    while grid[ending[0]][ending[1]] == 0:
+        grid = make_step(grid, k)
+        k += 1
+
+    path = shortest_path(grid, ending)
+    return grid, path
 
 
 def add_path_to_grid(
