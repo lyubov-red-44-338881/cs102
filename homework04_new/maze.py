@@ -164,7 +164,8 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
     return False
 
 
-def solve_maze(grid: List[List[Union[str, int]]]) -> Optional[List[Tuple[int, int]]]:
+def solve_maze(grid: List[List[Union[str, int]]],
+) -> Tuple[List[List[Union[str, int]]], Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]]:
     exits = get_exits(grid)
     if len(exits) == 1:
         return None
@@ -175,12 +176,12 @@ def solve_maze(grid: List[List[Union[str, int]]]) -> Optional[List[Tuple[int, in
     beginning = exits[0]
     ending = exits[1]
     grid[beginning[0]][beginning[1]] = 1
+    grid[ending[0]][ending[1]] = 0
     for row in range(len(grid) - 1):
         for col in range(len(grid[row]) - 1):
             if grid[row][col] == " ":
                 grid[row][col] = 0
 
-    grid[ending[0]][ending[1]] = 0
 
     k = 1
 
@@ -199,7 +200,8 @@ def solve_maze(grid: List[List[Union[str, int]]]) -> Optional[List[Tuple[int, in
     while grid[ending[0]][ending[1]] == 0:
         k += 1
         make_step(grid, k)
-    return shortest_path(grid, ending)
+    path = shortest_path(grid, ending)    
+    return grid, path
 
 
 def add_path_to_grid(
