@@ -200,8 +200,8 @@ def solve_maze(
     while grid[ending[0]][ending[1]] == 0:
         k += 1
         make_step(grid, k)
-        
-    path = shortest_path(grid, ending)    
+
+    path = shortest_path(grid, ending)
     return grid, path
 
 
