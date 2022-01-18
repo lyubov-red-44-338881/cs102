@@ -199,13 +199,20 @@ def solve_maze(
 
 
 def add_path_to_grid(
-    grid: List[List[Union[str, int]]], path: Optional[List[Tuple[int, int]]]
+    grid: List[List[Union[str, int]]], path: Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]
 ) -> List[List[Union[str, int]]]:
+    """
+    :param grid:
+    :param path:
+    :return:
+    """
     if path:
-        for i, row in enumerate(grid):
-            for j, _ in enumerate(row):
-                if (i, j) in path:
-                    grid[i][j] = "X"
+        for x, row in enumerate(grid):
+            for y, _ in enumerate(row):
+                if grid[x][y] != "■":
+                    grid[x][y] = " "
+                if (x, y) in path:
+                    grid[x][y] = "X"
     return grid
 
 
