@@ -49,7 +49,7 @@ class GameOfLife:
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
             self.grid = self.get_next_generation()
             self.draw_grid()
