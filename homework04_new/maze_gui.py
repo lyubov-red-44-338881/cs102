@@ -47,7 +47,7 @@ if __name__ == "__main__":
     canvas = tk.Canvas(window, width=M * CELL_SIZE, height=N * CELL_SIZE)
     canvas.pack()
 
-    draw_maze(CELL_SIZE)
+    draw_maze(GRID, CELL_SIZE)
     ttk.Button(window, text="Solve", command=show_solution).pack(pady=20)
 
     window.mainloop()
