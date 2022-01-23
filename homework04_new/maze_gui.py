@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 from typing import List, Union
-
 from maze import add_path_to_grid, bin_tree_maze, solve_maze
 
 
