@@ -31,7 +31,7 @@ def show_solution():
     if path:
         draw_maze(maze, CELL_SIZE)
     else:
-        tk.messagebox.showinfo("Message", "No solutions')
+        tk.messagebox.showinfo("Message", "No solutions")
 
 
 if __name__ == "__main__":
