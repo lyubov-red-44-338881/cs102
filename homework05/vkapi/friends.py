@@ -3,7 +3,7 @@ import math
 import time
 import typing as tp
 
-from vkapi import config
+from vkapi import config, session
 from vkapi.exceptions import APIError
 from vkapi.session import Session
 
@@ -17,7 +17,10 @@ class FriendsResponse:
 
 
 def get_friends(
-    user_id: int, count: int = 5000, offset: int = 0, fields: tp.Any = None
+    user_id: int,
+    count: int = 5000,
+    offset: int = 0,
+    fields: tp.Optional[tp.List[str]] = None,
 ) -> FriendsResponse:
     """
     Получить список идентификаторов друзей пользователя или расширенную информацию
@@ -28,20 +31,34 @@ def get_friends(
     :param fields: Список полей, которые нужно получить для каждого пользователя.
     :return: Список идентификаторов друзей пользователя или список пользователей.
     """
-    domain = config.VK_CONFIG["domain"]
-    access_token = config.VK_CONFIG["access_token"]
-    v = config.VK_CONFIG["version"]
-    fields = ", ".join(fields) if fields else ""
+    vk_config = {
+        "token": "d806c8a33647ce3d1297f7e0738c8f2963b7d14eed3f75c49990d52ca11b16670842426025451a1ea4b2a",
+        "client_id": "8137477",
+        "version": "5.131",
+        "domain": "https://api.vk.com/method/",
+    }
+    domain = Session(vk_config["domain"])
+    try:
+        req = domain.get(
+            "friends.get",
+            params={
+                "access_token": vk_config["token"],
+                "v": vk_config["version"],
+                "user_id": str(user_id),
+                "offset": str(offset),
+                "count": str(count),
+                "fields": fields,
+            },
+        )
+        data = req.json()["response"]["items"]
+        count = req.json()["response"]["count"]
+        return FriendsResponse(count, list(data))
+    except:
+        pass
+    return FriendsResponse(0, [{"items": ""}])
 
-    base = f"{domain}"
-    url = f"friends.get?access_token={access_token}&user_id={user_id}&fields={fields}&offset={offset}&count={count}&v={v}"
-    s = Session(base)
-    r = s.get(url)
-    response = FriendsResponse(r.json()["response"]["count"], r.json()["response"]["items"])
-    return response
 
-
-class MutualFriends(tp.TypedDict):
+class MutualFriends(tp.Dict):
     id: int
     common_friends: tp.List[int]
     common_count: int
@@ -66,35 +83,54 @@ def get_mutual(
     :param offset: Смещение, необходимое для выборки определенного подмножества общих друзей.
     :param progress: Callback для отображения прогресса.
     """
-    domain = config.VK_CONFIG["domain"]
-    access_token = config.VK_CONFIG["access_token"]
-    v = config.VK_CONFIG["version"]
-
-    s = Session(domain)
-    response = []
-
-    if target_uids:
-        # for i in range(math.floor(len(target_uids) / 100)):
-        for i in range(((len(target_uids) - 1) // 100) + 1):
-            try:
-                url = f"friends.getMutual?access_token={access_token}&source_uid={source_uid}&target_uid={target_uid}&target_uids={','.join(list(map(str, target_uids)))}&count={count}&offset={i*100}&v={v}"
-                friends = s.get(url)
-                for friend in friends.json()["response"]:
-                    response.append(
-                        MutualFriends(
-                            id=friend["id"],
-                            common_friends=list(map(int, friend["common_friends"])),
-                            common_count=friend["common_count"],
-                        )
+    vk_config = {
+        "token": "a3834712a2f44f6020dd1ebb6efaa6696b5b19acd878adfa1a95ab78df8595766331a2cae7080549b2dab",
+        "client_id": "8094474",
+        "version": "5.131",
+        "domain": "https://api.vk.com/method/",
+    }
+    domain = Session(vk_config["domain"])
+    target_uids = [] if target_uids is None else target_uids
+    if target_uid is not None:
+        target_uids.append(target_uid)
+    if not target_uids:
+        return target_uids  # type: ignore
+    cycles = (len(target_uids) - 1) // 100 + 1
+    mutual_friends = []
+    for i in range(cycles):
+        user_ids = ""
+        for j in range(i * 100, i * 100 + 100 if i != cycles - 1 else len(target_uids) % 100):
+            user_ids = user_ids + "," + str(target_uids[j])
+        user_ids = user_ids[1 : len(user_ids)]
+        try:
+            req = domain.get(
+                "friends.getMutual",
+                params={
+                    "access_token": vk_config["token"],
+                    "v": vk_config["version"],
+                    "source_uid": str(source_uid),
+                    "target_uids": str(user_ids),
+                    "offset": str(i * 100),
+                    "order": order,
+                    "count": 100,
+                },
+            )
+            for item in req.json()["response"]:
+                mutual_friends.append(
+                    MutualFriends(
+                        id=item["id"],
+                        common_count=item["common_count"],
+                        common_friends=item["common_friends"],
                     )
-            except:
-                pass
-            time.sleep(0.34)
-        return response
-    try:
-        url = f"friends.getMutual?access_token={access_token}&source_uid={source_uid}&target_uid={target_uid}&count={count}&offset={offset}&v={v}"
-        friends = s.get(url)
-        response.extend(friends.json()["response"])
-    except:
-        pass
-    return response
+                )
+        except:
+            pass
+        time.sleep(0.35)
+    if len(mutual_friends) == 1:
+        return mutual_friends[0]["common_friends"]
+    return mutual_friends
+
+
+if __name__ == "__main__":
+    print(get_friends(335415806))
+    print(get_mutual(source_uid=335415806, target_uids=[469126965, 170103551]))
