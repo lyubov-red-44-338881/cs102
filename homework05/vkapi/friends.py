@@ -37,9 +37,7 @@ def get_friends(
     url = f"friends.get?access_token={access_token}&user_id={user_id}&fields={fields}&offset={offset}&count={count}&v={v}"
     s = Session(base)
     r = s.get(url)
-    response = FriendsResponse(
-        r.json()["response"]["count"], r.json()["response"]["items"]
-    )
+    response = FriendsResponse(r.json()["response"]["count"], r.json()["response"]["items"])
     return response
 
 
