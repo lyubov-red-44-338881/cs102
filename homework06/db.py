@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String # isort: skip
-from sqlalchemy import create_engine
+from sqlalchemy import Column, Integer, String, create_engine # isort: skip
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
