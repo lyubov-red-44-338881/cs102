@@ -3,7 +3,6 @@ import string
 from collections import Counter
 
 
-
 class NaiveBayesClassifier:
     def __init__(self, alpha=1):
         self.alpha = alpha
