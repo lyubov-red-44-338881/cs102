@@ -1,6 +1,7 @@
 import math
-from collections import Counter
 import string
+from collections import Counter
+
 
 
 class NaiveBayesClassifier:
