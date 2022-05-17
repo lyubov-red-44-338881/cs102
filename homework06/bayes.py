@@ -1,5 +1,5 @@
 import math
-import string
+import string # isort: skip
 from collections import Counter
 
 
